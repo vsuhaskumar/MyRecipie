@@ -1,0 +1,28 @@
+<h1>All Recipes</h1>
+<hr/>
+
+<% @recipes.each do |recipe| %>
+ <div class = "row">
+     
+     <div class = "col-md-2"> <!--#allocate 2 colums to image, gravitar -->
+         <section class = "chef_info center">
+             <%= gravatar_for recipe.chef, size: 100 %> <!-- gravatar_for is method, you can put thatin aplication helper section app->helpers->application_helpers -->
+             <h5>Chef Name: <%= recipe.chef.chefname %> </h5>
+         </section>
+     </div>
+     
+       
+     <div class = "col-lg-8 well"> <!-- #allocate 8 remaining colums for contents of my recipe ... twitter bootsrap # well -creates box around it with grey styling -->
+         <h4> <%= link_to recipe.name, recipe_path(recipe) %> </h4>
+         <p> <%= recipe.summary %> </p>
+         <p> 
+             <span class = 'quiet'><small> <%= time_ago_in_words(recipe.created_at) %> ago </small></span>
+         </p>
+     </div>
+     
+     
+     
+     
+ </div>
+ <hr/>
+<% end %>
