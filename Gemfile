@@ -33,6 +33,7 @@ gem 'carrierwave', '0.10.0' #used for image uploader
 gem 'mini_magick', '3.8.0' #user for image uploader
 gem 'will_paginate', '3.1.5' #used for pagination, have updated the version of paginate to 3.1.5 from 3.0.7, coz was getting error while starting the server
 gem 'bootstrap-will_paginate', '0.0.10'  #used for pagination
+gem 'bcrypt', '3.1.11' #for Authentication, Chef (3.1.7 - older)
  
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
