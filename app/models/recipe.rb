@@ -9,6 +9,9 @@ class Recipe < ActiveRecord::Base
   
   validate :picture_size
   
+  default_scope -> {order(updated_at: :desc)}
+  
+  
   
   #implementing thumbs up feature
   def thumbs_up_total
@@ -29,3 +32,4 @@ class Recipe < ActiveRecord::Base
       end
     end
 end    
+

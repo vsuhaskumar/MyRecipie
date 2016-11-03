@@ -2,9 +2,10 @@ class RecipesController < ApplicationController
    
    def index
     #instance variable, so it wil be available in view
-    @recipes = Recipe.all.sort_by{|like| like.thumbs_up_total}.reverse  
+    #@recipes = Recipe.all.sort_by{|like| like.thumbs_up_total}.reverse  
+    @recipes = Recipe.paginate(page: params[:page], per_page: 5)
    end
-    
+     
    def show
     @recipe = Recipe.find(params[:id]) 
     #binding.pry #making use of gem pry which was added
