@@ -11,7 +11,7 @@
      </div>
      
        
-     <div class = "col-lg-8 well"> <!-- #allocate 8 remaining colums for contents of my recipe ... twitter bootsrap # well -creates box around it with grey styling -->
+     <div class = "col-lg-6 well"> <!-- #allocate 8 remaining colums for contents of my recipe ... twitter bootsrap # well -creates box around it with grey styling -->
          <h4> <%= link_to recipe.name, recipe_path(recipe) %> </h4>
          <p> <%= recipe.summary %> </p>
          <p> 
@@ -19,7 +19,9 @@
          </p>
      </div>
      
-     
+     <div class = "col-md-4">
+      <%= image_tag(recipe.picture.url, size:"250x150", class: "gravatar") if recipe.picture? %> 
+     </div>
      
      
  </div>
