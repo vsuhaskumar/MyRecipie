@@ -1,7 +1,8 @@
   class Chef < ActiveRecord::Base
     
   has_many :recipes 
-    
+  
+  has_many :likes  
     
   before_save { self.email = email.downcase} # making email downcase before saving it
   validates :chefname, presence:  true, length: {minimum: 3, maximum: 40}

@@ -1,7 +1,8 @@
 class RecipesController < ApplicationController
    
    def index
-    @recipes = Recipe.all  #instance variable, so it wil be available in view 
+    #instance variable, so it wil be available in view
+    @recipes = Recipe.all.sort_by{|like| like.thumbs_up_total}.reverse  
    end
     
    def show
@@ -46,6 +47,20 @@ class RecipesController < ApplicationController
       else
         render :edit
       end
+   end
+   
+   
+   def like
+    #binding.pry
+    @recipe = Recipe.find(params[:id])
+    like = Like.create(like: params[:like], chef: Chef.first, recipe: @recipe) #will set like = true
+        if like.valid?
+            flash[:success] = "Your selection was successful"
+            redirect_to :back #will redirect back to same page 
+        else
+            flash[:danger] = "You can only like/dislike a recipe once"
+            redirect_to :back
+        end
    end
    
    
