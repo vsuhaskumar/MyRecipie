@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
     
     #binding.pry .. In console ...params ... this will tell what all we are getting
     @recipe = Recipe.new(recipe_params) #match the signature and will take data to new create new recipe
-    @recipe.chef = Chef.find(5)
+    @recipe.chef = Chef.find(current_user)
     
       if @recipe.save
         flash[:success] = "Your recipe was create successfully"
