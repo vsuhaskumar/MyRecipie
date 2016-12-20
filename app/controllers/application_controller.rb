@@ -15,4 +15,13 @@ class ApplicationController < ActionController::Base
       # if current user is logged in or not
   end
   
+  
+  def require_user
+    if !logged_in?
+      flash[:danger] = "You must be logged in to perform the action"
+      redirect_to :back #stays in same page
+    end
+  end
+  
+  
 end
