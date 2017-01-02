@@ -3,5 +3,8 @@
 #
 # Examples:
 #
- Chef.create([{ chefname: 'masterchef' }, { email: 'master@chef.com' }, { password_digest: 'master' }])
-  
+chefs = [{:chefname => 'masterchef', :email => 'master@chef.com',:password_digest => 'master'}]
+                  
+chefs.each do |chef|
+  Chef.create!(chef)
+end
