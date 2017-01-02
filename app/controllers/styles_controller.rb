@@ -1,5 +1,7 @@
 class StylesController < ApplicationController
    
+      before_action :require_user, except: [:show] #need user for new and create. 
+   
    def new 
      @style = Style.new
    end

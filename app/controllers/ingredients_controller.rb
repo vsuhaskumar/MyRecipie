@@ -1,5 +1,7 @@
 class IngredientsController < ApplicationController
    
+   before_action :require_user, except: [:show] #need user for new and create. 
+   
    def new 
      @ingredient = Ingredient.new
    end

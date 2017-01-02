@@ -1,8 +1,10 @@
 class RecipesController < ApplicationController
    
    before_action :set_recipe, only: [:edit, :update, :show, :like]
-   before_action :require_user, except: [:show, :index] #only logged in user can create new recipe, this method is defined in application controller, so it is available to entire app
+   before_action :require_user, except: [:show, :index, :like] #only logged in user can create new recipe, this method is defined in application controller, so it is available to entire app
+   before_action :require_user_like, only: [:like]
    before_action :require_same_user, only: [:edit, :update]
+ 
    
    
    def index
@@ -21,7 +23,6 @@ class RecipesController < ApplicationController
    end
    
    def create
-    
     #binding.pry .. In console ...params ... this will tell what all we are getting
     @recipe = Recipe.new(recipe_params) #match the signature and will take data to new create new recipe
     @recipe.chef = current_user
@@ -30,7 +31,6 @@ class RecipesController < ApplicationController
         flash[:success] = "Your recipe was create successfully"
         redirect_to recipes_path
       else
-     
         render :new 
       end
     
@@ -69,7 +69,7 @@ class RecipesController < ApplicationController
    private 
     
     def  recipe_params 
-      params.require(:recipe).permit(:name, :summary, :description, :picture)
+      params.require(:recipe).permit(:name, :summary, :description, :picture, style_ids: [], ingredient_ids: [])
     end
     
     def set_recipe
@@ -81,6 +81,14 @@ class RecipesController < ApplicationController
           flash[:danger] = "You can only edit your own recipies"
           redirect_to recipes_path
         end
+    end
+    
+    
+    def require_user_like
+     if !logged_in?
+      flash[:danger] = "You must be logged in to perform the action"
+      redirect_to  :back
+     end
     end
         
 end    
