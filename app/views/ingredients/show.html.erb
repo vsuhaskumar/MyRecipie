@@ -1,4 +1,4 @@
-<%= render 'Shared/page_title', title: "All Recipes" %>
+<%= render 'Shared/page_title', title: "Recipes for : " +  @ingredient.name %>
 
 <ul class = "nav nav-tabs">
     <li class = "active">
@@ -10,9 +10,9 @@
 </ul>
 
 
-<%= will_paginate %>
+<%= will_paginate @recipes %>
 
-<% @recipes.each do |recipe| %>
+<% @ingredient.recipes.each do |recipe| %>
  <div class = "row">
      
      <div class = "col-md-2"> <!--#allocate 2 colums to image, gravitar -->
@@ -57,4 +57,4 @@
  <hr/>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate @recipes %>
