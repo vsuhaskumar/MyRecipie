@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   def current_user
     if (session[:chef_id]) == 1
-        redirect_to  root
+        redirect_to  register_path
     end
      @current_user ||= Chef.find(session[:chef_id]) if session[:chef_id] 
      #memoisation => "||="   ........ 
