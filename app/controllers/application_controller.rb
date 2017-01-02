@@ -4,9 +4,6 @@ class ApplicationController < ActionController::Base
   helper_method :current_user, :logged_in?
   
   def current_user
-    if (Chef.find(1)) == nil
-        redirect_to  register_path
-    end
      @current_user ||= Chef.find(session[:chef_id]) if session[:chef_id] 
      #memoisation => "||="   ........ 
      #if new user, it will go to database ... else if you are in same page, it will take from current user
