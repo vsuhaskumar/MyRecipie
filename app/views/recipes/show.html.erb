@@ -24,9 +24,14 @@
         
             <div class = "well">
                 
+                <% if @recipe.styles.any? %>
                 <!--adding style and ingredients-->
                  <p>Styles: <%= render @recipe.styles %></p> <!--will go to style folder and look for ingredient partial.-->
-                 <p>Ingredients: <%= render @recipe.ingredients %></p>
+                 <% end %>
+                 
+                 <% if @recipe.ingredients.any? %>
+                  <p>Ingredients: <%= render @recipe.ingredients %></p>
+                 <% end %>
                 
                 <p>
                     <strong> Steps: </strong>

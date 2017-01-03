@@ -27,10 +27,14 @@
          <h4> <%= link_to recipe.name, recipe_path(recipe) %> </h4>
          <p> <%= recipe.summary %> </p>
          
+         <% if recipe.styles.any? %>
          <!--adding style and ingredients-->
          <p>Styles: <%= render recipe.styles %></p> <!--will go to style folder and look for ingredient partial.-->
-         <p>Ingredients: <%= render recipe.ingredients %></p> <!-- will go to ingredient folder and look for ingredient partial.-->
+         <% end %>
          
+         <% if recipe.ingredients.any? %>
+         <p>Ingredients: <%= render recipe.ingredients %></p> <!-- will go to ingredient folder and look for ingredient partial.-->
+         <% end %>
          <p> 
             <span class = 'quiet'><small>Created: <%= time_ago_in_words(recipe.created_at) %> ago, &nbsp </small></span>
             <span class = 'quiet'><small>Updated: <%= time_ago_in_words(recipe.updated_at) %> ago </small></span>
