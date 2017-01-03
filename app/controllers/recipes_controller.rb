@@ -4,6 +4,7 @@ class RecipesController < ApplicationController
    before_action :require_user, except: [:show, :index, :like] #only logged in user can create new recipe, this method is defined in application controller, so it is available to entire app
    before_action :require_user_like, only: [:like]
    before_action :require_same_user, only: [:edit, :update]
+   before_action :admin_user, only: [:destroy]
  
    
    
@@ -66,6 +67,13 @@ class RecipesController < ApplicationController
    end
    
    
+   def destroy
+     Recipe.find(params[:id]).destroy
+     flash[:success] = "Recipe Deleted"
+     redirect_to recipes_path
+   end
+   
+   
    private 
     
     def  recipe_params 
@@ -77,7 +85,7 @@ class RecipesController < ApplicationController
     end
     
     def require_same_user
-        if current_user != @recipe.chef
+        if current_user != @recipe.chef and !current_user.admin?
           flash[:danger] = "You can only edit your own recipies"
           redirect_to recipes_path
         end
@@ -89,6 +97,11 @@ class RecipesController < ApplicationController
       flash[:danger] = "You must be logged in to perform the action"
       redirect_to  :back
      end
+    end
+    
+    
+    def admin_user
+        redirect_to recipes_path unless current_user.admin?
     end
         
 end    
